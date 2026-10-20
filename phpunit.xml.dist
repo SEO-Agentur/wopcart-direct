@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<phpunit
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.5/phpunit.xsd"
+	bootstrap="tests/bootstrap/bootstrap.php"
+	colors="true"
+	beStrictAboutOutputDuringTests="true"
+	failOnWarning="true"
+	failOnNotice="true"
+	cacheDirectory=".phpunit.cache">
+
+	<testsuites>
+		<!--
+			Unit only, on the same terms as the core plugin's suite. What is worth
+			testing without WordPress loaded is: the bootstrap's two refusals, the
+			seams this plugin answers and the shape of what it hands back, the
+			gateways' own arithmetic and state mapping, and the licence's effect on
+			nothing except updates. Anything that needs a real $wpdb, a real HTTP
+			call or a real hook ordering belongs in an integration suite against a
+			WordPress test install with both plugins active.
+		-->
+		<testsuite name="unit">
+			<directory suffix="Test.php">tests/Unit</directory>
+		</testsuite>
+	</testsuites>
+
+	<source>
+		<include>
+			<directory suffix=".php">src</directory>
+		</include>
+	</source>
+</phpunit>
