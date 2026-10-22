@@ -3,7 +3,7 @@
  * Plugin Name:       WopCart Direct
  * Plugin URI:        https://wopcart.com/direct/
  * Description:       Take payments through your own gateway accounts — Stripe, PayPal, Authorize.net, Mollie and 2Checkout — with no WopCart platform fee on any transaction. Add-on for WopCart.
- * Version:           1.0.0
+ * Version:           1.0.1
  * Requires at least: 6.4
  * Requires PHP:      8.2
  * Requires Plugins:  wopcart
@@ -25,7 +25,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-const VERSION  = '1.0.0';
+const VERSION  = '1.0.1';
 const BASENAME = 'wopcart-direct/wopcart-direct.php';
 const FILE     = __FILE__;
 const DIR      = __DIR__;

@@ -227,4 +227,24 @@ final class BootstrapRefusalTest extends AddonTestCase {
 			'A seam was added, removed or reordered without the suite being told. The order is not cosmetic: callbacks of equal priority run in registration order, which is what puts the licence field above the gateway credentials on the Payments tab.'
 		);
 	}
+
+	/**
+	 * problem() never calls core's helper before checking that it exists.
+	 *
+	 * `supports()` only exists from core 1.3.0. On an older core the class is there
+	 * and the method is not, so calling it straight is a fatal error on every
+	 * request — and WordPress's `Requires Plugins` header does not protect against
+	 * it, because it enforces that wopcart is present, not which version. The suite
+	 * loads a current core and so cannot produce that core by loading classes; the
+	 * guard is therefore asserted on the source.
+	 */
+	public function test_the_core_helper_is_only_called_when_it_exists(): void {
+		$source = (string) file_get_contents( dirname( __DIR__, 2 ) . '/src/Plugin.php' );
+
+		$this->assertMatchesRegularExpression(
+			'/method_exists\([^)]*\'supports\'[^)]*\)/',
+			$source,
+			'problem() must check that supports() exists before calling it.'
+		);
+	}
 }

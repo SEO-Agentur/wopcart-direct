@@ -125,9 +125,17 @@ final class Plugin {
 
 		// supports() is core's own version helper and the only version check an
 		// add-on is meant to make. It reports version 0 when core's VERSION constant
-		// is missing, which is what an install older than the helper itself looks
-		// like, so asking it is safe even then.
-		return self::refusal( $loaded, $loaded && \WopCart\Plugin::supports( MIN_CORE ) );
+		// is missing, so asking it is safe on a core that merely lost its constant.
+		// It is not safe on a core older than the helper: there the class exists and
+		// the method does not, and calling it would be a fatal error on every
+		// request — WordPress's `Requires Plugins` header enforces that wopcart is
+		// present, not which version. method_exists() short-circuits before that,
+		// and an absent helper is exactly what "too old" means here.
+		$supported = $loaded
+			&& method_exists( '\WopCart\Plugin', 'supports' )
+			&& \WopCart\Plugin::supports( MIN_CORE );
+
+		return self::refusal( $loaded, $supported );
 	}
 
 	/**
