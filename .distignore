@@ -1,0 +1,31 @@
+# Files excluded from the distributed plugin zip.
+#
+# Everything here is development scaffolding. The shipped add-on is the PHP in
+# src/, the drop-in updater in client/, and the root metadata — nothing that
+# needs Composer, and nothing that tells a buyer how the tests ran.
+
+# Version control
+.git
+.gitignore
+.gitattributes
+.github
+
+# Development configuration
+.distignore
+.editorconfig
+phpcs.xml.dist
+phpstan.neon.dist
+phpunit.xml.dist
+composer.json
+composer.lock
+
+# Development output
+.phpunit.cache
+tests
+vendor
+node_modules
+
+# Documentation for contributors, not for buyers
+README.md
+CONTRIBUTING.md
+SECURITY.md

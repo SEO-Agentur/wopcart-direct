@@ -243,3 +243,20 @@ GPL-2.0-or-later, the same as core. The protection against redistribution is
 supply, not restriction: updates and support need a valid licence, the platform
 is ours to run, and every download carries its customer and licence number. No
 feature is ever switched off for want of a key.
+
+## Changelog
+
+### 1.0.2
+- The licence requests name the product they are for: `WOPCART_DIRECT_PRODUCT_ID`
+  defaults to 14, the WopCart Direct product on wopcart.com, instead of 0. The store
+  tolerated 0 by falling back to the product the licence was issued for, so activations
+  and updates worked, but every request and every cache key named the wrong thing.
+- The distributed zip is built from `.distignore` and no longer carries the PHPUnit
+  cache, the test suite or the contributor README.
+
+### 1.0.1
+- Does not call a core helper that an older core does not have.
+
+### 1.0.0
+- First release: the merchant's own gateway accounts for Stripe, PayPal, Authorize.net,
+  Mollie and 2Checkout, with no platform fee.

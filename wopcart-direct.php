@@ -3,7 +3,7 @@
  * Plugin Name:       WopCart Direct
  * Plugin URI:        https://wopcart.com/direct/
  * Description:       Take payments through your own gateway accounts — Stripe, PayPal, Authorize.net, Mollie and 2Checkout — with no WopCart platform fee on any transaction. Add-on for WopCart.
- * Version:           1.0.1
+ * Version:           1.0.2
  * Requires at least: 6.4
  * Requires PHP:      8.2
  * Requires Plugins:  wopcart
@@ -25,7 +25,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-const VERSION  = '1.0.1';
+const VERSION  = '1.0.2';
 const BASENAME = 'wopcart-direct/wopcart-direct.php';
 const FILE     = __FILE__;
 const DIR      = __DIR__;
@@ -63,9 +63,15 @@ if ( ! defined( 'WOPCART_DIRECT_STORE_URL' ) ) {
  * using WopCart's own `src/Licensing` module, so this is a product post id on
  * that store and the value `item_id` is sent as. Overridable for the same reason as
  * the store URL: a staging store numbers its products differently.
+ *
+ * It was 0 until 1.0.2, which the store tolerates — a request without a product
+ * falls back to the one the licence was issued for, so activations and updates
+ * worked. It still named the wrong thing in every request and in the cache keys
+ * built from it, and it would have refused to work the moment one licence could
+ * cover two products.
  */
 if ( ! defined( 'WOPCART_DIRECT_PRODUCT_ID' ) ) {
-	define( 'WOPCART_DIRECT_PRODUCT_ID', 0 );
+	define( 'WOPCART_DIRECT_PRODUCT_ID', 14 );
 }
 
 require_once __DIR__ . '/src/Autoloader.php';
